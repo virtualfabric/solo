@@ -25,10 +25,14 @@ $port =~ /^\d+$/ or $noport						or die "Usage: $0 -port=PORT COMMAND\n";
 
 if ($port)
 {
-    # To work with OpenBSD: change to
+    # To work with OpenBSD and Illumos: change to
     # $addr = pack(CnC, 127, 0, 1);
     # but make sure to use different ports across different users.
     # (Thanks to  www.gotati.com .)
+    #
+    # The above is also required in SmartOS LX zones when not running as root.
+    # Different users in the same zone should use different ports, ports are
+    # not shared accross zones.
     $addr = pack(CnC, 127, $<, 1);
     print "solo: bind ", join(".", unpack(C4, $addr)), ":$port\n"	if $verbose;
 

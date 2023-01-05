@@ -39,6 +39,10 @@ See the comment in the code, which changes the IP address to 127.0.0.1.
 It will work, but it will interlock between users.
 Thanks www.gotati.com.)
 
+(NOTE: Illumos and it's zone types also require the OpenBSD configuration for non-root users.
+Care must be taken to make sure ports don't overlap within the GZ, but each zone gets it's own network stack.
+SmartOS LX zones function with the OpenBSD change for non-root users too - ports inside a zone will overlap accross users, but not accross zones.)
+
 The -silent switch tells solo to silently terminate when a previous instance is already running.  Without -silent, a message is printed to stderr, indicating that a previous instance is already running.
 
 Running a job this way (using crontab and solo) is much more maintainable than other methods:
